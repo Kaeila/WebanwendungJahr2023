@@ -18,7 +18,9 @@ public class Benutzer extends Person
   //-------------------------------------------------------------------------
   //  Var(s)
   //-------------------------------------------------------------------------     
-    protected String passwort = null;
+    protected String benutzername;
+    protected String passwort;
+    protected boolean isAdmin;
 
 
   //-------------------------------------------------------------------------
