@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -30,8 +31,8 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
   //-------------------------------------------------------------------------
   //  Login / Logout
   //-------------------------------------------------------------------------     
-    protected String benutzername = null;
-    protected String passwort = null;
+    private String benutzername;
+    private String passwort;
 
     public String getBenutzername() { return benutzername; }
 
@@ -42,19 +43,21 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
     public void setPasswort(String passwort) { this.passwort = passwort; }
            
     public String doLogin() 
-    {  
-        /*
-            CHECK USER CREDENTIALS HERE !!!
-            If correct, then store the MyLoginObject in the session --> websession.setAttribute("MyLoginObject", true) 
-            The de.hhbk.web.filter.BackendAreaFilter will check the MyLoginObject for the backend folder path.
-            Remove the MyLoginObject on logout (see doLogout()). 
-            Session timeout (see web.xml) will automatically delete all session objects.
-        */  
-        HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true); 
-        websession.setAttribute("MyLoginObject", true); 
-        // The return parameter is the navigation path to the next website.
+    {
+      BenutzerDao benutzerDao = new BenutzerDao();
+      HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true); 
+      if (benutzerDao.isValidCredentials(benutzername, passwort)) {
+        websession.setAttribute("benutzername", benutzername);
+        websession.setAttribute("MyLoginObject", true);
         return "backend/empty.xhtml?faces-redirect=true"; 
-    } 
+      } 
+      else {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", "Benutzername oder Passwort ist falsch");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        return "";
+      }
+     
+    }
     
     public String doLogout() 
     {  
