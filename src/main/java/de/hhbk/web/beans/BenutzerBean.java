@@ -33,7 +33,17 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
   //-------------------------------------------------------------------------     
     private String benutzername;
     private String passwort;
+    private boolean isAdmin;
 
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
+    
     public String getBenutzername() { return benutzername; }
 
     public void setBenutzername(String benutzername) { this.benutzername = benutzername; }
@@ -45,10 +55,10 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
     public String doLogin() throws Exception 
     {
       BenutzerDao benutzerDao = new BenutzerDao();
+      Benutzer benutzer = new Benutzer();
       HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(benutzerDao.isAdmin(benutzername)) {
-          websession.setAttribute("benutzername", benutzername);
-        }
+      this.isAdmin = benutzerDao.isAdmin(benutzername);
+       
       if (benutzerDao.isValidCredentials(benutzername, passwort)) {
         websession.setAttribute("benutzername", benutzername);
         websession.setAttribute("MyLoginObject", true);
