@@ -3,7 +3,7 @@ package de.hhbk.model;
 import java.io.Serializable; 
 import javax.persistence.Embeddable;
 
-
+//TEST GIT PUSH
 @Embeddable 
 public class Adresse implements Serializable
 {
