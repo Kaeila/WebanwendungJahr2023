@@ -9,7 +9,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries
 ({
     @NamedQuery(name="findByEmailAndPassword", query="SELECT u FROM Benutzer u WHERE u.email = :email AND u.passwort = :passwort"),
-    @NamedQuery(name="findByUsernameAndPassword", query="SELECT b.benutzername, b.passwort FROM Benutzer b WHERE b.benutzername = :benutzername AND b.passwort = :passwort")
+    @NamedQuery(name="findByUsernameAndPassword", query="SELECT b.benutzername, b.passwort FROM Benutzer b WHERE b.benutzername = :benutzername AND b.passwort = :passwort"),
+    @NamedQuery(name="checkIfAdmin", query="SELECT 1 FROM Benutzer b WHERE b.benutzername = :benutzername and b.isAdmin = 1")    
 })
 
 
