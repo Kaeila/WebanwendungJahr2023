@@ -33,15 +33,16 @@ public class BenutzerDao extends GenericDao<Benutzer>
             return q.uniqueResult();
         });  
     }
-
-    public boolean isValidCredentials(String benutzername, String passwort) {
-        TypedQuery<Benutzer> query = entityManager.createQuery(
-            "SELECT * FROM Benutzer b WHERE b.Benutzername = :benutzername AND b.Passwort = :passwort", Benutzer.class);
-        query.setParameter("benutzername", benutzername);
-        query.setParameter("passwort", passwort);
-
-        return !query.getResultList().isEmpty();
-    }
+    
+    public boolean isValidCredentials(String benutzername, String passwort) throws Exception {
+        return (boolean) executeQuery( (session) -> 
+        { 
+            Query<Benutzer> q = session.createNamedQuery("findByUsernameAndPassword");
+            q.setParameter("benutzername", benutzername);
+            q.setParameter("passwort", passwort);
+            return !q.getResultList().isEmpty();
+        }); 
+    }   
 
        public boolean isAdmin(String benutzername) {
         TypedQuery<Boolean> query = entityManager.createQuery(
