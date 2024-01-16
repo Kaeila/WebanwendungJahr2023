@@ -51,5 +51,4 @@ public class Benutzer extends Person
     public void setPasswort(String passwort) { this.passwort = passwort; }
 
 
-
 }

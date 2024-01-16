@@ -27,9 +27,8 @@ public abstract class Person extends ModelTemplate
     protected PersonAnrede anrede = PersonAnrede.EMPTY; 
     protected Adresse adresse = null;
     protected String telefon = null;
-    protected String email = null;   
+    protected String email = null;  
 
-    
   //-------------------------------------------------------------------------
   //  Constructor(s)
   //-------------------------------------------------------------------------    

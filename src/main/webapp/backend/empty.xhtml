@@ -12,6 +12,8 @@
             <div class="ui-g-12">
                 <div class="card">
                     <h1>Willkommen #{benutzer.benutzername}</h1>
+                    <p><p:outputLabel value="Admin" rendered="#{benutzer.isAdmin}"/> </p>
+                    <p><p:outputLabel value="Kein Admin" rendered="#{not benutzer.isAdmin}"/> </p>
                 </div>
             </div>
         </div>
