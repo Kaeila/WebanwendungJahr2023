@@ -42,11 +42,11 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
 
     public void setPasswort(String passwort) { this.passwort = passwort; }
            
-    public String doLogin() 
+    public String doLogin() throws Exception 
     {
       BenutzerDao benutzerDao = new BenutzerDao();
-      HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true); 
       if (benutzerDao.isValidCredentials(benutzername, passwort)) {
+        HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true); 
         websession.setAttribute("benutzername", benutzername);
         websession.setAttribute("MyLoginObject", true);
         return "backend/empty.xhtml?faces-redirect=true"; 
