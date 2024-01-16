@@ -44,16 +44,13 @@ public class BenutzerDao extends GenericDao<Benutzer>
         }); 
     }   
 
-       public boolean isAdmin(String benutzername) {
-        TypedQuery<Boolean> query = entityManager.createQuery(
-                "SELECT b.isAdmin FROM Benutzer b WHERE b.Benutzername = :benutzername", Boolean.class);
-        query.setParameter("benutzername", benutzername);
-
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return false;
-        }
+       public boolean isAdmin(String benutzername) throws Exception {
+         return (boolean) executeQuery( (session) -> 
+        { 
+            Query<Benutzer> q = session.createNamedQuery("checkIfAdmin");
+            q.setParameter("benutzername", benutzername);
+            return !q.getResultList().isEmpty();
+        }); 
     }
 
 
