@@ -1,7 +1,7 @@
 package de.hhbk.model;
 
 import java.time.LocalDate;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,19 +11,18 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Hardware extends ModelTemplate
-{ 
+{
   //-------------------------------------------------------------------------
   //  Var(s)
-  //-------------------------------------------------------------------------     
+  //-------------------------------------------------------------------------
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected long id = -1L; 
+    protected long id = -1L;
     protected String seriennummer = null;
     protected String modell = null;
     protected String hersteller = null;
@@ -32,7 +31,7 @@ public class Hardware extends ModelTemplate
     protected LocalDate lieferdatum = LocalDate.now();
     @ManyToOne(fetch=FetchType.EAGER) // cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, 
     @JoinColumn(name="raum_id")
-    protected Raum raum = null;
+    protected Mietobjekt mietobjekt = null;
 
    
   //-------------------------------------------------------------------------

@@ -1,22 +1,23 @@
 package de.hhbk.web.beans;
 
 
-import de.hhbk.dao.GenericDao;
-import de.hhbk.model.Hardware;
-import de.hhbk.model.Raum;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import de.hhbk.dao.GenericDao;
+import de.hhbk.model.Hardware;
+import de.hhbk.model.Mietobjekt;
 
-@Named(value = "rooms") 
+
+@Named(value = "accommodation") 
 @ViewScoped
-public class RaumBean extends BeanTemplate<Raum, GenericDao<Raum>>
+public class MietobjektBean extends BeanTemplate<Mietobjekt, GenericDao<Mietobjekt>>
 {
   //-------------------------------------------------------------------------
   //  Constructor(s)
   //-------------------------------------------------------------------------     
-    public RaumBean() { super(new GenericDao<Raum>(Raum.class)); } 
+    public MietobjektBean() { super(new GenericDao<Mietobjekt>(Mietobjekt.class)); } 
 
     @PostConstruct
     public void init()
@@ -28,7 +29,7 @@ public class RaumBean extends BeanTemplate<Raum, GenericDao<Raum>>
   //-------------------------------------------------------------------------
   //  Link hardware and rooms
   //-------------------------------------------------------------------------     
-    public void addHardware(Raum r, Hardware h)
+    public void addHardware(Mietobjekt r, Hardware h)
     { 
         try        
         {
@@ -44,7 +45,7 @@ public class RaumBean extends BeanTemplate<Raum, GenericDao<Raum>>
     
     
     
-    public void removeHardware(Raum r, Hardware h)
+    public void removeHardware(Mietobjekt r, Hardware h)
     { 
          try        
         { 

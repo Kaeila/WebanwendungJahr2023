@@ -2,19 +2,22 @@ package de.hhbk.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 
 
 @Entity
-public class Mietobjekt extends ModelTemplate
-{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Mietobjekt extends ModelTemplate {
   //-------------------------------------------------------------------------
   //  Var(s)
   //-------------------------------------------------------------------------     
@@ -30,13 +33,15 @@ public class Mietobjekt extends ModelTemplate
     protected Double nebenkostengesamt = null;
     protected int typId;
     protected int benutzerId;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="mietobjekt", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    protected Set<Hardware> hardwareList = null;   
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mietobjekt", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    protected Set<Mieter> mieterList = null;   
 
   //-------------------------------------------------------------------------
   //  Constructor(s)
   //-------------------------------------------------------------------------     
+public Mietobjekt() {
+        super();
+    }
 
     @Override
     public long getId() {
@@ -119,49 +124,42 @@ public class Mietobjekt extends ModelTemplate
     public void setBenutzerId(int benutzerId) {
         this.benutzerId = benutzerId;
     }
- 
-    
-
-    public Set<Hardware> getHardwareList() 
-    { 
-        if (hardwareList == null) { hardwareList = new HashSet<>(); }
-        return hardwareList; 
-    }
-
-    public void setHardwareList(Set<Hardware> hardwareList) { this.hardwareList = hardwareList; }
- 
-    
   //-------------------------------------------------------------------------
   //  Method(s)
   //-------------------------------------------------------------------------
-    public boolean hasHardware() { return (hardwareList != null && !hardwareList.isEmpty()); }
+    public Set<Mieter> getMieterList() {
+        if (mieterList == null) {
+            mieterList = new HashSet<>();
+        }
+        return mieterList;
+    }
+
+    public void setMieterList(Set<Mieter> mieterList) {
+        this.mieterList = mieterList;
+    }
+
+    public boolean hasMieter() {
+        return (mieterList != null && !mieterList.isEmpty());
+    }
     
-    public void addHardware(Hardware h)
-    {
-        if (h != null && h.hasId())
-        {
-            getHardwareList().add(h);
-            h.setRaum(this);
+    public void addMieter(Mieter h) {
+        if (h != null && h.hasId()) {
+            getMieterList().add(h);
+            h.setMietobjekt(this);
         }
     }
  
-    public void removeHardware(Hardware h)
-    {
-        if (hasHardware())
-        {
-            getHardwareList().remove(h);
-            h.setRaum(null);
+    public void removeMieter(Mieter h) {
+        if (hasMieter()) {
+            getMieterList().remove(h);
+            h.setMietobjekt(null);
         }
     }
     
     @PreRemove
-    public void nullAllHardware()
-    {
-        if (hasHardware())
-        {
-            getHardwareList().forEach(h -> h.setRaum(null));
+    public void nullAllMieter() {
+        if (hasMieter()) {
+            getMieterList().forEach(h -> h.setMietobjekt(null));
         }
     }
-    
-    
-}
+    }
