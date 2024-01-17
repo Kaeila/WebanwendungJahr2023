@@ -8,47 +8,42 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Mietobjekt extends ModelTemplate {
-    //-------------------------------------------------------------------------
-    //  Var(s)
-    //-------------------------------------------------------------------------     
 
+@Entity
+public class Mietobjekt extends ModelTemplate
+{
+  //-------------------------------------------------------------------------
+  //  Var(s)
+  //-------------------------------------------------------------------------     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id = -1L;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    protected long id = -1L; 
     protected String beschreibung = null;
     protected String strasse = null;
-    protected String plz = null;
     protected String ort = null;
-    protected double wohnflaeche = 0;
-    protected double quadratmeterPreis = 0;
-    protected double nebenkostenGesamt = 0;
+    protected String plz = null;
+    protected Double wohnflaeche = null;
+    protected Double quadratmeterpreis = null;
+    protected Double nebenkostengesamt = null;
     protected int typId;
     protected int benutzerId;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mietobjekt", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    protected Set<Mieter> mieterList = null;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="mietobjekt", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    protected Set<Hardware> hardwareList = null;   
 
-    //-------------------------------------------------------------------------
-    //  Constructor(s)
-    //-------------------------------------------------------------------------     
-    public Mietobjekt() {
-        super();
-    }
 
-    //-------------------------------------------------------------------------
-    //  Get / Set
-    //-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  //  Constructor(s)
+  //-------------------------------------------------------------------------     
+
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
     public void setId(long id) {
         this.id = id;
     }
@@ -69,14 +64,6 @@ public class Mietobjekt extends ModelTemplate {
         this.strasse = strasse;
     }
 
-    public String getPlz() {
-        return plz;
-    }
-
-    public void setPlz(String plz) {
-        this.plz = plz;
-    }
-
     public String getOrt() {
         return ort;
     }
@@ -85,28 +72,36 @@ public class Mietobjekt extends ModelTemplate {
         this.ort = ort;
     }
 
-    public double getWohnflaeche() {
+    public String getPlz() {
+        return plz;
+    }
+
+    public void setPlz(String plz) {
+        this.plz = plz;
+    }
+
+    public Double getWohnflaeche() {
         return wohnflaeche;
     }
 
-    public void setWohnflaeche(double wohnflaeche) {
+    public void setWohnflaeche(Double wohnflaeche) {
         this.wohnflaeche = wohnflaeche;
     }
 
-    public double getQuadratmeterPreis() {
-        return quadratmeterPreis;
+    public Double getQuadratmeterpreis() {
+        return quadratmeterpreis;
     }
 
-    public void setQuadratmeterPreis(double quadratmeterPreis) {
-        this.quadratmeterPreis = quadratmeterPreis;
+    public void setQuadratmeterpreis(Double quadratmeterpreis) {
+        this.quadratmeterpreis = quadratmeterpreis;
     }
 
-    public double getNebenkostenGesamt() {
-        return nebenkostenGesamt;
+    public Double getNebenkostengesamt() {
+        return nebenkostengesamt;
     }
 
-    public void setNebenkostenGesamt(double nebenkostenGesamt) {
-        this.nebenkostenGesamt = nebenkostenGesamt;
+    public void setNebenkostengesamt(Double nebenkostengesamt) {
+        this.nebenkostengesamt = nebenkostengesamt;
     }
 
     public int getTypId() {
@@ -124,43 +119,49 @@ public class Mietobjekt extends ModelTemplate {
     public void setBenutzerId(int benutzerId) {
         this.benutzerId = benutzerId;
     }
+ 
+    
 
-    //-------------------------------------------------------------------------
-    //  Method(s)
-    //-------------------------------------------------------------------------
-    public Set<Mieter> getMieterList() {
-        if (mieterList == null) {
-            mieterList = new HashSet<>();
-        }
-        return mieterList;
+    public Set<Hardware> getHardwareList() 
+    { 
+        if (hardwareList == null) { hardwareList = new HashSet<>(); }
+        return hardwareList; 
     }
 
-    public void setMieterList(Set<Mieter> mieterList) {
-        this.mieterList = mieterList;
-    }
-
-    public boolean hasMieter() {
-        return (mieterList != null && !mieterList.isEmpty());
-    }
-
-    public void addMieter(Mieter h) {
-        if (h != null && h.hasId()) {
-            getMieterList().add(h);
-            h.setMietobjekt(this);
-        }
-    }
-
-    public void removeMieter(Mieter h) {
-        if (hasMieter()) {
-            getMieterList().remove(h);
-            h.setMietobjekt(null);
+    public void setHardwareList(Set<Hardware> hardwareList) { this.hardwareList = hardwareList; }
+ 
+    
+  //-------------------------------------------------------------------------
+  //  Method(s)
+  //-------------------------------------------------------------------------
+    public boolean hasHardware() { return (hardwareList != null && !hardwareList.isEmpty()); }
+    
+    public void addHardware(Hardware h)
+    {
+        if (h != null && h.hasId())
+        {
+            getHardwareList().add(h);
+            h.setRaum(this);
         }
     }
-
+ 
+    public void removeHardware(Hardware h)
+    {
+        if (hasHardware())
+        {
+            getHardwareList().remove(h);
+            h.setRaum(null);
+        }
+    }
+    
     @PreRemove
-    public void nullAllMieter() {
-        if (hasMieter()) {
-            getMieterList().forEach(h -> h.setMietobjekt(null));
+    public void nullAllHardware()
+    {
+        if (hasHardware())
+        {
+            getHardwareList().forEach(h -> h.setRaum(null));
         }
     }
+    
+    
 }
