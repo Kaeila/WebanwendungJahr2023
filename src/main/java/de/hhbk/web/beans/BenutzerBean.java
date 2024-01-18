@@ -43,7 +43,6 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
         this.isAdmin = isAdmin;
     }
     
-    
     public String getBenutzername() { return benutzername; }
 
     public void setBenutzername(String benutzername) { this.benutzername = benutzername; }
@@ -54,11 +53,10 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
            
     public String doLogin() throws Exception 
     {
-      BenutzerDao benutzerDao = new BenutzerDao();
-      Benutzer benutzer = new Benutzer();
-      HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-      this.isAdmin = benutzerDao.isAdmin(benutzername);
        
+      BenutzerDao benutzerDao = new BenutzerDao();
+      HttpSession websession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+      this.isAdmin = benutzerDao.isAdmin(benutzername);  
       if (benutzerDao.isValidCredentials(benutzername, passwort)) {
         websession.setAttribute("benutzername", benutzername);
         websession.setAttribute("MyLoginObject", true);
@@ -67,7 +65,7 @@ public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
       else {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", "Benutzername oder Passwort ist falsch");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        return "";
+        return "Test";
       }
     }
     
