@@ -6,7 +6,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import de.hhbk.dao.GenericDao;
-import de.hhbk.model.Mieter;
 import de.hhbk.model.Mietobjekt;
 
 
