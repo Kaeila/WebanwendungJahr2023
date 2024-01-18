@@ -2,11 +2,9 @@ package de.hhbk.utils;
  
 import de.hhbk.model.Adresse;
 import de.hhbk.model.Benutzer;
-import de.hhbk.model.Drucker;
-import de.hhbk.model.Hardware;
+import de.hhbk.model.Mieter;
+import de.hhbk.model.Mietobjekt;
 import de.hhbk.model.Person;
-import de.hhbk.model.Raum;
-import de.hhbk.model.Rechner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -37,10 +35,8 @@ public class HibernateUtil
                     .addAnnotatedClass(Adresse.class)
                     .addAnnotatedClass(Person.class)
                     .addAnnotatedClass(Benutzer.class)
-                    .addAnnotatedClass(Hardware.class)
-                    .addAnnotatedClass(Rechner.class)
-                    .addAnnotatedClass(Drucker.class)
-                    .addAnnotatedClass(Raum.class)
+                    .addAnnotatedClass(Mieter.class)
+                    .addAnnotatedClass(Mietobjekt.class)
                     .buildSessionFactory();
         }
         return sessionFactory; 

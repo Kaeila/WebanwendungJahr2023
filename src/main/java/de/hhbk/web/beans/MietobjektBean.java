@@ -6,7 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import de.hhbk.dao.GenericDao;
-import de.hhbk.model.Hardware;
+import de.hhbk.model.Mieter;
 import de.hhbk.model.Mietobjekt;
 
 
@@ -24,16 +24,17 @@ public class MietobjektBean extends BeanTemplate<Mietobjekt, GenericDao<Mietobje
     { 
         resetItem(); 
     }
+}
 
     
   //-------------------------------------------------------------------------
   //  Link hardware and rooms
   //-------------------------------------------------------------------------     
-    public void addHardware(Mietobjekt r, Hardware h)
+    /*public void addMietobjekt(Mietobjekt r)
     { 
         try        
         {
-            r.addHardware(h); 
+            r.addMietobjekt(r); 
             dao.save(r);  
         } 
         catch (Exception e)
@@ -45,7 +46,7 @@ public class MietobjektBean extends BeanTemplate<Mietobjekt, GenericDao<Mietobje
     
     
     
-    public void removeHardware(Mietobjekt r, Hardware h)
+    public void removeHardware(Mietobjekt r)
     { 
          try        
         { 
@@ -58,7 +59,7 @@ public class MietobjektBean extends BeanTemplate<Mietobjekt, GenericDao<Mietobje
             setErrorMessage("Fehler", e.getMessage());
             updateMessageBox(); 
         }
-    }    
+    } */   
  
 
-}
+

@@ -7,7 +7,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Drucker</ui:define>
+    <ui:define name="title">Mieter</ui:define>
     
     <ui:define name="content">
         <style>   
@@ -21,7 +21,7 @@
                     <h:form id="contentForm">
                      
                         <p:menubar>
-                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{printer.resetItem()}" update=":editModalDialogForm"/>
+                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{mieter.resetItem()}" update=":editModalDialogForm"/>
                             <f:facet name="options">             
                                 <p:commandButton action="#{benutzer.doLogout()}" icon="fa fa-sign-out" style="font-size: 15px; height: 30px; width: 30px; margin-top: 3px; margin-left: 3px; vertical-align: middle;" />                                
                             </f:facet>                        
