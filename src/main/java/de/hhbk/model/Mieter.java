@@ -2,13 +2,14 @@ package de.hhbk.model;
 
 import de.hhbk.model.enums.PersonAnrede;
 import java.time.LocalDate;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
-public abstract class Mieter extends Person {
+@Entity
+public class Mieter extends Person {
     //-------------------------------------------------------------------------
     //  Var(s)
     //-------------------------------------------------------------------------     
@@ -17,7 +18,7 @@ public abstract class Mieter extends Person {
     protected String iban = null;
     protected String kontoinhaber = null;
     protected String kreditinstitut = null;
-    @ManyToOne(fetch = FetchType.EAGER) // cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, 
+    @ManyToOne // cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, 
     @JoinColumn(name = "mietobjekt_id")
     protected Mietobjekt mietobjekt = null;
 
