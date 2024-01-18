@@ -21,11 +21,11 @@
                     <h:form id="contentForm">
 
                         <p:menubar>
-                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{mieter.resetItem()}" update=":editModalDialogForm" />
+                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{benutzer.resetItem()}" update=":editModalDialogForm" />
                         </p:menubar>
 
                         <br/>
-                        <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw pi-users"></i>&nbsp;Benutzer</h1>
+                        <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw pi-users"></i>&nbsp;Mieter</h1>
 
                         <p:dataTable id="itemTable" var="item" value="#{mieter.itemList}" style="width: 100%;">
                             <p:column headerText="" style="width: 10px;">
@@ -43,7 +43,7 @@
                                 <h:outputText value="#{item.adresse}" />
                             </p:column>
                             <p:column style="width: 110px; text-align: center;">
-                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{benutzer.setItem(item)}" update=":editModalDialogForm">
+                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{mieter.setItem(item)}" update=":editModalDialogForm">
                                     <i class="fa fa-wrench fa-fw"></i>
                                 </p:commandLink>
                                 &nbsp;
@@ -87,7 +87,7 @@
                             <p:inputText id="ip_id" value="#{mieter.item.id}" style="width: 100%;" disabled="true" />
 
                             <p:outputLabel for="ip_anrede" value="Anrede" />
-                            <p:selectOneMenu id="ip_anrede" value="#{mieter.item.anrede}" style="width: 100%;">
+                            <p:selectOneMenu id="ip_anrede" value="#{benutzer.item.anrede}" style="width: 100%;">
                                 <f:selectItems value="#{benutzer.anredeOptionen}" var="rvar" itemLabel="#{rvar.anrede}" />
                             </p:selectOneMenu>
 
@@ -111,15 +111,24 @@
 
                             <p:outputLabel for="ip_telefon" value="Telefon" />
                             <p:inputText id="ip_telefon" value="#{mieter.item.telefon}" style="width: 100%;" />
+                            
+                            <p:outputLabel for="ip_mobilnummer" value="Mobilnummer" />
+                            <p:inputText id="ip_mobilnummer" value="#{mieter.item.mobilnummer}" style="width: 100%;" />
 
-                            <p:outputLabel for="ip_email" value="E-Mail" />
-                            <p:inputText id="ip_email" value="#{mieter.item.email}" style="width: 100%;" />
+                            <p:outputLabel for="ip_iban" value="IBAN" />
+                            <p:inputText id="ip_iban" value="#{mieter.item.iban}" style="width: 100%;" />
+
+                            <p:outputLabel for="ip_kontoinhaber" value="Kontoinhaber" />
+                            <p:inputText id="ip_kontoinhaber" value="#{mieter.item.kontoinhaber}" style="width: 100%;" />
+                            
+                            <p:outputLabel for="ip_kreditinstitut" value="Kreditinstitut" />
+                            <p:inputText id="ip_kreditinstitut" value="#{mieter.item.kreditinstitut}" style="width: 100%;" />
 
                         </p:panelGrid>
                     </p:scrollPanel>
                     <br/><br/>
 
-                    <p:commandButton value="Speichern" style="width: 120px;" action="#{mieter.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
+                    <p:commandButton value="Speichern" style="width: 120px;" action="#{benutzer.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
                     <p:commandButton value="Schlie&szlig;en" style="width: 120px;" onclick="PF('dlgEdit').hide();" immediate="true" />
                 </h:form>
             </div>
