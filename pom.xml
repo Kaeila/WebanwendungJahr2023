@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.hhbk</groupId>
-    <artifactId>Userstory5</artifactId>
+    <artifactId>WebanwendungProjekt</artifactId>
     <version>1</version>
     <packaging>war</packaging>
 

@@ -21,21 +21,13 @@
                     <h:form id="contentForm">
 
                         <p:menubar>
-                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{benutzer.resetItem()}" update=":editModalDialogForm" />
+                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{mieter.resetItem()}" update=":editModalDialogForm" />
                         </p:menubar>
 
                         <br/>
                         <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw pi-users"></i>&nbsp;Mieter</h1>
 
                         <p:dataTable id="itemTable" var="item" value="#{mieter.itemList}" style="width: 100%;">
-                            <p:column headerText="" style="width: 10px;">
-                                <p:outputPanel style="display:block" rendered="#{item.isWeiblich()}">
-                                    <i class="fa fa-female fa-fw"></i>
-                                </p:outputPanel>
-                                <p:outputPanel style="display:block" rendered="#{item.isMaennlich()}">
-                                    <i class="fa fa-male fa-fw"></i>
-                                </p:outputPanel>
-                            </p:column>
                             <p:column headerText="Name" style="width: 350px;">
                                 <b><h:outputText value="#{item.vorname} #{item.nachname}"/></b>
                             </p:column>
@@ -49,7 +41,7 @@
                                 &nbsp;
                                 <p:commandLink action="#{mieter.removeItem(item)}" update=":contentForm">
                                     <i class="fa fa-trash fa-fw"></i>
-                                    <p:confirm header="Eintrag l&ouml;schen?" message="Sollen der Eintrag gel&ouml;scht werden?" icon="pi pi-exclamation-triangle" />
+                                    <p:confirm header="Eintrag l&ouml;schen?" message="Soll der Eintrag gel&ouml;scht werden?" icon="pi pi-exclamation-triangle" />
                                 </p:commandLink>
                             </p:column>
                         </p:dataTable>
@@ -87,8 +79,8 @@
                             <p:inputText id="ip_id" value="#{mieter.item.id}" style="width: 100%;" disabled="true" />
 
                             <p:outputLabel for="ip_anrede" value="Anrede" />
-                            <p:selectOneMenu id="ip_anrede" value="#{benutzer.item.anrede}" style="width: 100%;">
-                                <f:selectItems value="#{benutzer.anredeOptionen}" var="rvar" itemLabel="#{rvar.anrede}" />
+                            <p:selectOneMenu id="ip_anrede" value="#{mieter.item.anrede}" style="width: 100%;">
+                                <f:selectItems value="#{mieter.anredeOptionen}" var="rvar" itemLabel="#{rvar.anrede}" />
                             </p:selectOneMenu>
 
                             <p:outputLabel for="ip_vorname" value="Vorname" />
@@ -128,7 +120,7 @@
                     </p:scrollPanel>
                     <br/><br/>
 
-                    <p:commandButton value="Speichern" style="width: 120px;" action="#{benutzer.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
+                    <p:commandButton value="Speichern" style="width: 120px;" action="#{mieter.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
                     <p:commandButton value="Schlie&szlig;en" style="width: 120px;" onclick="PF('dlgEdit').hide();" immediate="true" />
                 </h:form>
             </div>

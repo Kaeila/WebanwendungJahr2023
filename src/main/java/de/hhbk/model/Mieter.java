@@ -1,7 +1,6 @@
 package de.hhbk.model;
 
 import de.hhbk.model.enums.PersonAnrede;
-import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -13,6 +12,7 @@ public class Mieter extends Person {
     //-------------------------------------------------------------------------
     //  Var(s)
     //-------------------------------------------------------------------------     
+    public Mieter() { super(); }
 
     protected String mobilnummer = null;
     protected String iban = null;

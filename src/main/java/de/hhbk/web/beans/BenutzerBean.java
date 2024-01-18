@@ -13,7 +13,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 
-@Named(value = "benutzer") 
+@Named(value = "benutzer")
 @SessionScoped
 public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao>
 {

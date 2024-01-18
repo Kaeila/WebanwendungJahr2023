@@ -9,7 +9,7 @@
             .labelColumn {
                 width: 115px;
             }
-            
+
             .imputColumn {
                 width: 100%;
             }
@@ -28,19 +28,11 @@
                         </p:menubar>
 
                         <br/>
-                        <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw pi-users"></i>&nbsp;Benutzer</h1>
+                        <h1 style="margin-top: 20px;"><i class="layout-menu item-icon pi pi-fw pi-users"></i>&nbsp;Benutzer</h1>
 
                         <p:dataTable id="itemTable" var="item" value="#{benutzer.itemList}" style="width: 100%;">
-                            <p:column headerText="" style="width: 10px;">
-                                <p:outputPanel style="display:block" rendered="#{item.isWeiblich()}">
-                                    <i class="fa fa-female fa-fw"></i>
-                                </p:outputPanel>
-                                <p:outputPanel style="display:block" rendered="#{item.isMaennlich()}">
-                                    <i class="fa fa-male fa-fw"></i>
-                                </p:outputPanel>
-                            </p:column>
                             <p:column headerText="Name" style="width: 350px;">
-                                <b><h:outputText value="#{item.vorname} #{item.nachname}"/></b>
+                                <b><h:outputText value="#{benutzer.item.vorname} #{benutzer.item.nachname}"/></b>
                             </p:column>
                             <p:column headerText="Anschrift">
                                 <h:outputText value="#{item.adresse}" />

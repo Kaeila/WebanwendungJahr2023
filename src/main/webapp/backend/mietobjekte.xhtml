@@ -25,7 +25,7 @@
                         </p:menubar>
 
                         <br/>
-                        <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw pi-users"></i>&nbsp;Mietobjekte</h1>
+                        <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw fa fa-home"></i>&nbsp;Mietobjekte</h1>
 
                         <p:dataTable id="itemTable" var="item" value="#{accommodation.itemList}" style="width: 100%;">
                             <p:column headerText="Beschreibung" style="width: 350px;">
@@ -41,11 +41,11 @@
                                 <h:outputText value="#{item.plz}" />
                             </p:column> 
                             <p:column style="width: 110px; text-align: center;">
-                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{mieter.setItem(item)}" update=":editModalDialogForm">
+                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{accommodation.setItem(item)}" update=":editModalDialogForm">
                                     <i class="fa fa-wrench fa-fw"></i>
                                 </p:commandLink>
                                 &nbsp;
-                                <p:commandLink action="#{mieter.removeItem(item)}" update=":contentForm">
+                                <p:commandLink action="#{accommodation.removeItem(item)}" update=":contentForm">
                                     <i class="fa fa-trash fa-fw"></i>
                                     <p:confirm header="Eintrag l&ouml;schen?" message="Sollen der Eintrag gel&ouml;scht werden?" icon="pi pi-exclamation-triangle" />
                                 </p:commandLink>
@@ -53,7 +53,7 @@
                         </p:dataTable>
 
                         <br/><br/>
-                        <p:outputLabel value="#{mieter.itemList.size()} Eintr&auml;ge gefunden." />
+                        <p:outputLabel value="#{accommodation.itemList.size()} Eintr&auml;ge gefunden." />
                     </h:form>
                     <br/>
                     <br/>
@@ -109,7 +109,7 @@
                     </p:scrollPanel>
                     <br/><br/>
 
-                    <p:commandButton value="Speichern" style="width: 120px;" action="#{benutzer.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
+                    <p:commandButton value="Speichern" style="width: 120px;" action="#{accommodation.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
                     <p:commandButton value="Schlie&szlig;en" style="width: 120px;" onclick="PF('dlgEdit').hide();" immediate="true" />
                 </h:form>
             </div>

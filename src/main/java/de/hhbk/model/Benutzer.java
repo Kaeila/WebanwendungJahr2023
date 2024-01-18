@@ -1,15 +1,13 @@
 package de.hhbk.model;
 
+import de.hhbk.model.enums.PersonAnrede;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-import de.hhbk.model.enums.PersonAnrede;
-
 
 @NamedQueries
 ({
-    
     @NamedQuery(name="findByUsernameAndPassword", query="SELECT b.benutzername, b.passwort FROM Benutzer b WHERE b.benutzername = :benutzername AND b.passwort = :passwort"),
     @NamedQuery(name="checkIfAdmin", query="SELECT 1 FROM Benutzer b WHERE b.benutzername = :benutzername and b.isAdmin = 1")
 })
@@ -18,6 +16,8 @@ import de.hhbk.model.enums.PersonAnrede;
 @Entity
 public class Benutzer extends Person
 {
+  
+    public Benutzer() { super(); }
   //-------------------------------------------------------------------------
   //  Var(s)
   //-------------------------------------------------------------------------     
@@ -29,8 +29,7 @@ public class Benutzer extends Person
   //-------------------------------------------------------------------------
   //  Constructor(s)
   //-------------------------------------------------------------------------     
-    public Benutzer() { super(); }
-
+    
     public Benutzer(String vorname, String nachname, String email, String passwort) 
     { 
         this(PersonAnrede.EMPTY, vorname, nachname, email, passwort);  
@@ -42,7 +41,6 @@ public class Benutzer extends Person
         this.anrede = anrede;
         this.passwort = passwort;
     } 
-
 
   //-------------------------------------------------------------------------
   //  Get / Set
