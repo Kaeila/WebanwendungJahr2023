@@ -1,10 +1,13 @@
 package de.hhbk.model;
 
+import de.hhbk.model.enums.Typ;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +31,8 @@ public class Mietobjekt extends ModelTemplate {
     protected String strasse = null;
     protected String ort = null;
     protected String plz = null;
+    @Enumerated(EnumType.STRING)
+    protected Typ typName = Typ.EMPTY;
     protected Double wohnflaeche = null;
     protected Double quadratmeterpreis = null;
     protected Double nebenkostengesamt = null;
@@ -84,6 +89,32 @@ public class Mietobjekt extends ModelTemplate {
     public void setPlz(String plz) {
         this.plz = plz;
     }
+    
+    public Typ getHaustyp() {
+        return typName;
+    }
+
+    public void setHaustyp(Typ typName) {
+        this.typName = typName;
+    }
+    
+    public String getGeschlecht() {
+        return getHaustyp().getName();
+    }
+
+    public boolean isdHouse() {
+        return (typName == Typ.DETACHED_HOUSE);
+    }
+
+    public boolean isMansion() {
+        return (typName == Typ.MANSION);
+    }
+    public boolean isTownHouse() {
+        return (typName == Typ.TOWNHOUSE);
+    }
+    public boolean isVilla() {
+        return (typName == Typ.VILLA);
+    }
 
     public Double getWohnflaeche() {
         return wohnflaeche;
@@ -107,14 +138,6 @@ public class Mietobjekt extends ModelTemplate {
 
     public void setNebenkostengesamt(Double nebenkostengesamt) {
         this.nebenkostengesamt = nebenkostengesamt;
-    }
-
-    public int getTypId() {
-        return typId;
-    }
-
-    public void setTypId(int typId) {
-        this.typId = typId;
     }
 
     public int getBenutzerId() {

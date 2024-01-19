@@ -6,6 +6,9 @@ import javax.inject.Named;
 
 import de.hhbk.dao.GenericDao;
 import de.hhbk.model.Mietobjekt;
+import de.hhbk.model.enums.Typ;
+import java.util.Arrays;
+import java.util.List;
 
 @Named(value = "mietobjekt")
 @ViewScoped
@@ -21,5 +24,8 @@ public class MietobjektBean extends BeanTemplate<Mietobjekt, GenericDao<Mietobje
     @PostConstruct
     public void init() {
         resetItem();
+    }
+    public List getTypOptionen() {
+        return Arrays.asList(Typ.values());
     }
 }

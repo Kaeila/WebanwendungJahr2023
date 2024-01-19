@@ -28,8 +28,11 @@
                         <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw fa fa-home"></i>&nbsp;Mietobjekte</h1>
 
                         <p:dataTable id="itemTable" var="item" value="#{mietobjekt.itemList}" style="width: 100%;">
-                            <p:column headerText="Beschreibung" style="width: 350px;">
+                            <p:column headerText="Beschreibung" style="width: 300px;">
                                 <b><h:outputText value="#{item.beschreibung}"/></b>
+                            </p:column>
+                            <p:column headerText="Haustyp">
+                                <b><h:outputText value="#{item.haustyp}"/></b>
                             </p:column>
                             <p:column headerText="Strasse">
                                 <h:outputText value="#{item.strasse}" />
@@ -83,7 +86,11 @@
 
                             <p:outputLabel for="ip_id" value="ID" />
                             <p:inputText id="ip_id" value="#{mietobjekt.item.id}" style="width: 100%;" disabled="true" />
-
+                            
+                            <p:outputLabel for="ip_haustyp" value="Haustyp" />
+                            <p:selectOneMenu id="ip_haustyp" value="#{mietobjekt.item.haustyp}" style="width: 100%;">
+                                <f:selectItems value="#{mietobjekt.typOptionen}"/>
+                            </p:selectOneMenu>
                             <p:outputLabel for="ip_beschreibung" value="Beschreibung" />
                             <p:inputText id="ip_beschreibung" value="#{mietobjekt.item.beschreibung}" style="width: 100%;" required="true"/>
 
