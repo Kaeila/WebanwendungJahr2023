@@ -14,16 +14,16 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Mietobjekt extends ModelTemplate {
-  //-------------------------------------------------------------------------
-  //  Var(s)
-  //-------------------------------------------------------------------------     
+    //-------------------------------------------------------------------------
+    //  Var(s)
+    //-------------------------------------------------------------------------     
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected long id = -1L; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id = -1L;
     protected String beschreibung = null;
     protected String strasse = null;
     protected String ort = null;
@@ -34,12 +34,12 @@ public class Mietobjekt extends ModelTemplate {
     protected int typId;
     protected int benutzerId;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "mietobjekt", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    protected Set<Mieter> mieterList = null;   
+    protected Set<Mieter> mieterList = null;
 
-  //-------------------------------------------------------------------------
-  //  Constructor(s)
-  //-------------------------------------------------------------------------     
-public Mietobjekt() {
+    //-------------------------------------------------------------------------
+    //  Constructor(s)
+    //-------------------------------------------------------------------------     
+    public Mietobjekt() {
         super();
     }
 
@@ -124,9 +124,10 @@ public Mietobjekt() {
     public void setBenutzerId(int benutzerId) {
         this.benutzerId = benutzerId;
     }
-  //-------------------------------------------------------------------------
-  //  Method(s)
-  //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    //  Method(s)
+    //-------------------------------------------------------------------------
+
     public Set<Mieter> getMieterList() {
         if (mieterList == null) {
             mieterList = new HashSet<>();
@@ -141,25 +142,25 @@ public Mietobjekt() {
     public boolean hasMieter() {
         return (mieterList != null && !mieterList.isEmpty());
     }
-    
+
     public void addMieter(Mieter h) {
         if (h != null && h.hasId()) {
             getMieterList().add(h);
             h.setMietobjekt(this);
         }
     }
- 
+
     public void removeMieter(Mieter h) {
         if (hasMieter()) {
             getMieterList().remove(h);
             h.setMietobjekt(null);
         }
     }
-    
+
     @PreRemove
     public void nullAllMieter() {
         if (hasMieter()) {
             getMieterList().forEach(h -> h.setMietobjekt(null));
         }
     }
-    }
+}

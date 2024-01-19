@@ -2,17 +2,18 @@ package de.hhbk.model;
 
 import de.hhbk.model.enums.PersonAnrede;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 
 @Entity
 public class Mieter extends Person {
+
     //-------------------------------------------------------------------------
     //  Var(s)
     //-------------------------------------------------------------------------     
-    public Mieter() { super(); }
+    public Mieter() {
+        super();
+    }
 
     protected String mobilnummer = null;
     protected String iban = null;
@@ -25,17 +26,18 @@ public class Mieter extends Person {
     //-------------------------------------------------------------------------
     //  Constructor(s)
     //-------------------------------------------------------------------------    
-   public Mieter(String vorname, String nachname, String email) 
-    { 
-        this(PersonAnrede.EMPTY, vorname, nachname, email);  
-    } 
+    public Mieter(String vorname, String nachname, String email) {
+        this(PersonAnrede.EMPTY, vorname, nachname, email);
+    }
 
-    public Mieter(PersonAnrede anrede, String vorname, String nachname, String email) 
-    { 
-        super(vorname, nachname, email); 
+    public Mieter(PersonAnrede anrede, String vorname, String nachname, String email) {
+        super(vorname, nachname, email);
         this.anrede = anrede;
-    } 
+    }
 
+    //-------------------------------------------------------------------------
+    //  Get / Set
+    //-------------------------------------------------------------------------     
     public String getMobilnummer() {
         return mobilnummer;
     }

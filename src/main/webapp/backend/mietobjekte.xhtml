@@ -9,7 +9,7 @@
             .labelColumn {
                 width: 115px;
             }
-            
+
             .imputColumn {
                 width: 100%;
             }
@@ -21,31 +21,31 @@
                     <h:form id="contentForm">
 
                         <p:menubar>
-                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{benutzer.resetItem()}" update=":editModalDialogForm" />
+                            <p:menuitem value="Hinzuf&uuml;gen" icon="fa fa-plus" oncomplete="PF('dlgEdit').show();" action="#{mietobjekt.resetItem()}" update=":editModalDialogForm" />
                         </p:menubar>
 
                         <br/>
                         <h1 style="margin-top: 20px;"><i class="layout-menuitem-icon pi pi-fw fa fa-home"></i>&nbsp;Mietobjekte</h1>
 
-                        <p:dataTable id="itemTable" var="item" value="#{accommodation.itemList}" style="width: 100%;">
+                        <p:dataTable id="itemTable" var="item" value="#{mietobjekt.itemList}" style="width: 100%;">
                             <p:column headerText="Beschreibung" style="width: 350px;">
                                 <b><h:outputText value="#{item.beschreibung}"/></b>
                             </p:column>
                             <p:column headerText="Strasse">
                                 <h:outputText value="#{item.strasse}" />
                             </p:column>
-                               <p:column headerText="Ort">
+                            <p:column headerText="Ort">
                                 <h:outputText value="#{item.ort}" />
                             </p:column>
-                               <p:column headerText="PLZ">
+                            <p:column headerText="PLZ">
                                 <h:outputText value="#{item.plz}" />
                             </p:column> 
                             <p:column style="width: 110px; text-align: center;">
-                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{accommodation.setItem(item)}" update=":editModalDialogForm">
+                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{mietobjekt.setItem(item)}" update=":editModalDialogForm">
                                     <i class="fa fa-wrench fa-fw"></i>
                                 </p:commandLink>
                                 &nbsp;
-                                <p:commandLink action="#{accommodation.removeItem(item)}" update=":contentForm">
+                                <p:commandLink action="#{mietobjekt.removeItem(item)}" update=":contentForm">
                                     <i class="fa fa-trash fa-fw"></i>
                                     <p:confirm header="Eintrag l&ouml;schen?" message="Sollen der Eintrag gel&ouml;scht werden?" icon="pi pi-exclamation-triangle" />
                                 </p:commandLink>
@@ -53,7 +53,7 @@
                         </p:dataTable>
 
                         <br/><br/>
-                        <p:outputLabel value="#{accommodation.itemList.size()} Eintr&auml;ge gefunden." />
+                        <p:outputLabel value="#{mietobjekt.itemList.size()} Eintr&auml;ge gefunden." />
                     </h:form>
                     <br/>
                     <br/>
@@ -82,40 +82,38 @@
                         <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" columnClasses="labelColumn, inputColumn" style="width: 100%; margin-bottom: 15px; margin-top: 15px;">
 
                             <p:outputLabel for="ip_id" value="ID" />
-                            <p:inputText id="ip_id" value="#{accommodation.item.id}" style="width: 100%;" disabled="true" />
+                            <p:inputText id="ip_id" value="#{mietobjekt.item.id}" style="width: 100%;" disabled="true" />
 
                             <p:outputLabel for="ip_beschreibung" value="Beschreibung" />
-                            <p:inputText id="ip_beschreibung" value="#{accommodation.item.beschreibung}" style="width: 100%;" required="true"/>
+                            <p:inputText id="ip_beschreibung" value="#{mietobjekt.item.beschreibung}" style="width: 100%;" required="true"/>
 
                             <p:outputLabel for="ip_strasse" value="Strasse" />
-                            <p:inputText id="ip_strasse" value="#{accommodation.item.strasse}" style="width: 100%;" required="true" />
+                            <p:inputText id="ip_strasse" value="#{mietobjekt.item.strasse}" style="width: 100%;" required="true" />
 
                             <p:outputLabel for="ip_ort" value="Ort" />
-                            <p:inputText id="ip_ort" value="#{accommodation.item.ort}" style="width: 100%;"  required="True"/>
-                            
+                            <p:inputText id="ip_ort" value="#{mietobjekt.item.ort}" style="width: 100%;"  required="True"/>
+
                             <p:outputLabel for="ip_adr_plz" value="Plz" />
-                            <p:inputText id="ip_adr_plz" value="#{accommodation.item.plz}" style="width: 100%;"  required="True" />
+                            <p:inputText id="ip_adr_plz" value="#{mietobjekt.item.plz}" style="width: 100%;"  required="True" />
 
                             <p:outputLabel for="ip_wohnflaeche" value="Wohnflaeche" />
-                            <p:inputText id="ip_wohnflaeche" value="#{accommodation.item.wohnflaeche}" style="width: 100%;"  required="True" />
-                            
+                            <p:inputText id="ip_wohnflaeche" value="#{mietobjekt.item.wohnflaeche}" style="width: 100%;"  required="True" />
+
                             <p:outputLabel for="ip_quadratmeterpreis" value="Quadratmeterpreis" />
-                            <p:inputText id="ip_quadratmeterpreis" value="#{accommodation.item.quadratmeterpreis}" style="width: 100%;"  required="True" />
+                            <p:inputText id="ip_quadratmeterpreis" value="#{mietobjekt.item.quadratmeterpreis}" style="width: 100%;"  required="True" />
 
                             <p:outputLabel for="ip_nebenkostengesamt" value="Nebenkostengesamt" />
-                            <p:inputText id="ip_nebenkostengesamt" value="#{accommodation.item.nebenkostengesamt}" style="width: 100%;" required="True" />
+                            <p:inputText id="ip_nebenkostengesamt" value="#{mietobjekt.item.nebenkostengesamt}" style="width: 100%;" required="True" />
 
                         </p:panelGrid>
                     </p:scrollPanel>
                     <br/><br/>
 
-                    <p:commandButton value="Speichern" style="width: 120px;" action="#{accommodation.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
+                    <p:commandButton value="Speichern" style="width: 120px;" action="#{mietobjekt.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
                     <p:commandButton value="Schlie&szlig;en" style="width: 120px;" onclick="PF('dlgEdit').hide();" immediate="true" />
                 </h:form>
             </div>
         </p:dialog>
-
-
 
     </ui:define>
 

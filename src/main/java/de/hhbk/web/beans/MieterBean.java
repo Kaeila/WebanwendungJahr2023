@@ -9,23 +9,26 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-
 @Named(value = "mieter")
 @ViewScoped
-public class MieterBean extends BeanTemplate<Mieter, GenericDao<Mieter>>
-{
-  //-------------------------------------------------------------------------
-  //  Constructor(s)
-  //-------------------------------------------------------------------------     
-    public MieterBean() { super(new GenericDao<Mieter>(Mieter.class)); } 
+public class MieterBean extends BeanTemplate<Mieter, GenericDao<Mieter>> {
+    //-------------------------------------------------------------------------
+    //  Constructor(s)
+    //-------------------------------------------------------------------------     
+
+    public MieterBean() {
+        super(new GenericDao<Mieter>(Mieter.class));
+    }
 
     @PostConstruct
-    public void init()
-    { 
-        resetItem(); 
+    public void init() {
+        resetItem();
     }
-     //-------------------------------------------------------------------------
-  //  Get / Set
-  //-------------------------------------------------------------------------     
-    public List getAnredeOptionen() { return Arrays.asList(PersonAnrede.values()); }
+    //-------------------------------------------------------------------------
+    //  Get / Set
+    //-------------------------------------------------------------------------     
+
+    public List getAnredeOptionen() {
+        return Arrays.asList(PersonAnrede.values());
+    }
 }
