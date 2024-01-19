@@ -1,6 +1,7 @@
 package de.hhbk.web.beans;
 
 import de.hhbk.dao.BenutzerDao;
+import de.hhbk.dao.GenericDao;
 import de.hhbk.model.Benutzer;
 import de.hhbk.model.enums.PersonAnrede;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @Named(value = "benutzer")
 @SessionScoped
-public class BenutzerBean extends BeanTemplate<Benutzer, BenutzerDao> {
+public class BenutzerBean extends BeanTemplate<Benutzer, GenericDao<Benutzer>> {
     //-------------------------------------------------------------------------
     //  Constructor(s)
     //-------------------------------------------------------------------------     
