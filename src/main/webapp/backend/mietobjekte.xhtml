@@ -43,16 +43,21 @@
                             <p:column headerText="PLZ">
                                 <h:outputText value="#{item.plz}" />
                             </p:column> 
-                            <p:column style="width: 110px; text-align: center;">
-                                <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{mietobjekt.setItem(item)}" update=":editModalDialogForm">
-                                    <i class="fa fa-wrench fa-fw"></i>
-                                </p:commandLink>
-                                &nbsp;
-                                <p:commandLink action="#{mietobjekt.removeItem(item)}" update=":contentForm">
-                                    <i class="fa fa-trash fa-fw"></i>
-                                    <p:confirm header="Eintrag l&ouml;schen?" message="Sollen der Eintrag gel&ouml;scht werden?" icon="pi pi-exclamation-triangle" />
-                                </p:commandLink>
-                            </p:column>
+                           <p:column style="width: 200px; text-align: center">
+                            <p:commandLink oncomplete="PF('dlgEdit').show();" action="#{mietobjekt.setItem(item)}" update=":editModalDialogForm" 
+                                           rendered="#{benutzer.isAdmin}" disabled="#{not benutzer.isAdmin}">
+                                <i class="fa fa-wrench fa-fw"></i>
+                                <p:confirm header="Eintrag bearbeiten?" message="Soll der Eintrag bearbeitet werden?" icon="pi pi-exclamation-triangle" />
+                            </p:commandLink>
+                            &nbsp;
+                            <p:commandLink action="#{mietobjekt.removeItem(item)}" update=":contentForm" 
+                                           rendered="#{benutzer.isAdmin}" disabled="#{not benutzer.isAdmin}">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <p:confirm header="Eintrag l&ouml;schen?" message="Soll der Eintrag gel&ouml;scht werden?" icon="pi pi-exclamation-triangle" />
+                            </p:commandLink>
+
+                            <p:outputLabel value="Keine Berechtigung zum Speichern oder löschen" rendered="#{not benutzer.isAdmin}" style="color: red;" />
+                        </p:column>
                         </p:dataTable>
 
                         <br/><br/>
@@ -116,7 +121,8 @@
                     </p:scrollPanel>
                     <br/><br/>
 
-                    <p:commandButton value="Speichern" style="width: 120px;" action="#{mietobjekt.saveItem()}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
+                    <p:commandButton value="Speichern" style="width: 120px;" action="#{mietobjekt.saveItem()}" rendered="#{benutzer.isAdmin}" disabled="#{not benutzer.isAdmin}" oncomplete="PF('dlgEdit').hide();" update=":contentForm, messageBox" /> &nbsp;
+                    <p:commandButton value="Keine Berechtigung" rendered="#{not benutzer.isAdmin}" style="color: red; cursor: not-allowed; margin-right: 10px; font-weight: bolder" />
                     <p:commandButton value="Schlie&szlig;en" style="width: 120px;" onclick="PF('dlgEdit').hide();" immediate="true" />
                 </h:form>
             </div>
