@@ -7,13 +7,27 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
+ <style>
+  .card h1 {
+    text-align: center;
+    font-size 25px;
+  }
+  .context p {
+    .text-align:center;
+    font-size: 23px;
+  }
+  </style>
+
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
                     <h1>Willkommen #{benutzer.benutzername}</h1>
-                    <p><p:outputLabel value="Admin" rendered="#{benutzer.isAdmin}"/> </p>
-                    <p><p:outputLabel value="Kein Admin" rendered="#{not benutzer.isAdmin}"/> </p>
+                    <p><p:outputLabel value="Admin" rendered="#{benutzer.isAdmin}"/></p>
+                    <p><p:outputLabel value="Kein Admin" rendered="#{not benutzer.isAdmin}"/></p>
+                </div>
+                <div class="context">
+                   <p>Ein herzliches Willkommen im Zuhause Ihrer Immobilie HausBau GmbH steht Ihnen jederzeit zur Seite, um Ihre Anliegen zu betreuen!</p>
                 </div>
             </div>
         </div>
