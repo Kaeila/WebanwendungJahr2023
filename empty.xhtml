@@ -7,11 +7,25 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
+  <style>
+  .card h1 {
+    text-align: center;
+    font-size 25px;
+  }
+  .context p {
+    .text-align:center;
+    font-size: 23px;
+  }
+  </style>
+
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
-                    <h1>Willkommen #{benutzer.benutzername}</h1>
+                    <h1>Willkommen <b>#{benutzer.benutzername}</b></h1>
+                </div>
+                <div class="context">
+                   <p>Ein herzliches Willkommen im Zuhause Ihrer Immobilie HausBau GmbH steht Ihnen jederzeit zur Seite, um Ihre Anliegen zu betreuen!</p>
                 </div>
             </div>
         </div>
